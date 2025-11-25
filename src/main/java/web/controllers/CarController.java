@@ -1,28 +1,25 @@
-package web.controller;
+package web.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.dao.CarDao;
-import web.dao.CarDaoImpl;
+
+import web.services.CarService;
+import web.services.CarServiceImpl;
 
 @Controller
 public class CarController {
 
-    private final CarDao carDao;
+    private final CarService carService;
 
-    public CarController(CarDaoImpl carDao) {
-        this.carDao = carDao;
+    public CarController(CarServiceImpl carService) {
+        this.carService = carService;
     }
 
     @GetMapping("/cars")
     public String printCars(@RequestParam(name = "count", required = false) Integer count, ModelMap model) {
-        if (count == null || count <= 0 || count >= 5) {
-            model.addAttribute("carsList", carDao.printCars(5));
-        }else {
-            model.addAttribute("carsList", carDao.printCars(count));
-        }
+        model.addAttribute("carsList", carService.printCars(count));
         return "cars";
     }
 }
