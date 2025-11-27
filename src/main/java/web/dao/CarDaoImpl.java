@@ -1,15 +1,18 @@
 package web.dao;
 
-import web.models.Car;
+import org.springframework.stereotype.Repository;
+import web.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CarDaoImpl implements CarDao{
-    private static int CARS_COUNT;
+
+    private Integer CARS_COUNT;
     private List<Car> cars;
 
-    {
+    public List<Car> printCars(int number) {
         cars = new ArrayList<>();
 
         cars.add(new Car(++CARS_COUNT, "Honda", "black"));
@@ -17,13 +20,7 @@ public class CarDaoImpl implements CarDao{
         cars.add(new Car(++CARS_COUNT, "Mercedes", "red"));
         cars.add(new Car(++CARS_COUNT, "Zeekr", "orange"));
         cars.add(new Car(++CARS_COUNT, "Lexus", "silver"));
-    }
 
-    public List<Car> printCars(int number) {
-        List<Car> result = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            result.add(cars.get(i));
-        }
-        return result;
+        return cars;
     }
 }
