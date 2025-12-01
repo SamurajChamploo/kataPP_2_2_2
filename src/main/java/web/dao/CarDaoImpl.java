@@ -9,10 +9,10 @@ import java.util.List;
 @Repository
 public class CarDaoImpl implements CarDao{
 
-    private Integer CARS_COUNT;
+    private Integer CARS_COUNT = 0;
     private List<Car> cars;
 
-    public List<Car> printCars(int number) {
+    public List<Car> printCars() {
         cars = new ArrayList<>();
 
         cars.add(new Car(++CARS_COUNT, "Honda", "black"));

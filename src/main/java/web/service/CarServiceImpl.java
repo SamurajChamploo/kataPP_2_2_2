@@ -6,7 +6,6 @@ import web.dao.CarDaoImpl;
 import web.model.Car;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -18,8 +17,9 @@ public class CarServiceImpl implements CarService {
     }
 
     public List<Car> printCars(Integer number) {
-        return carDao.printCars(Optional.ofNullable(number)
-                .filter(n -> n > 0 && n < 5)
-                .orElse(5));
+        if (number == null) {
+            return carDao.printCars();
+        }
+        return carDao.printCars().stream().limit(number).toList();
     }
 }
